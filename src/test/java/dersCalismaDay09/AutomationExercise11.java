@@ -1,0 +1,51 @@
+package dersCalismaDay09;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import utilities.TestBase;
+
+public class AutomationExercise11 extends TestBase {
+    @Test
+    public void test01(){
+        //2. Navigate to url 'http://automationexercise.com'
+        //2. 'http://automationexercise.com' URL'sine gidin
+        driver.get("http://automationexercise.com");
+
+        //3. Verify that home page is visible successfully
+        //3. Ana sayfanın başarıyla göründüğünü doğrulayın
+        WebElement anaSayfaKontrolu = driver.findElement(By.xpath("(//span[text()='Automation'])[1]"));
+        Assert.assertTrue(anaSayfaKontrolu.isDisplayed());
+
+        //4. Click 'Cart' button
+        //4. 'Sepet' düğmesine tıklayın
+        driver.findElement(By.xpath("(//a[@href='/view_cart'])[1]")).click();
+
+        //5. Scroll down to footer
+        //5. Altbilgiye doğru aşağı kaydırın
+
+
+
+        //6. Verify text 'SUBSCRIPTION'
+        //6. 'ABONELİK' metnini doğrulayın
+        String expectedKelime ="SUBSCRIPTION";
+        String actualKelime =driver.findElement(By.xpath("//h2[text()='Subscription']")).getText();
+        Assert.assertEquals(expectedKelime,actualKelime);
+
+
+        //7. Enter email address in input and click arrow button
+        //7. Giriş alanına e-posta adresini girin ve ok düğmesine tıklayın
+        driver.findElement(By.xpath("//input[@id='susbscribe_email']")).sendKeys("yasir@selam.com");
+        driver.findElement(By.xpath("//button[@id='subscribe']")).click();
+
+
+        //8. Verify success message 'You have been successfully subscribed!' is visible
+        //8. Başarı mesajını doğrulayın 'Başarılı bir şekilde abone oldunuz!' görünür
+        expectedKelime ="You have been successfully subscribed!";
+        actualKelime= driver.findElement(By.xpath("//div[text()='You have been successfully subscribed!']")).getText();
+        Assert.assertEquals(expectedKelime,actualKelime);
+
+
+    }
+}
